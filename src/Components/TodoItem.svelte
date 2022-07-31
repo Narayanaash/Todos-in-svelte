@@ -1,5 +1,8 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import Close from "./ui/Close.svelte";
+
+  const dispatch = createEventDispatcher();
 
   export let todo = {};
 </script>
@@ -9,7 +12,14 @@
     <input type="checkbox" />
     <span>{todo.title}</span>
   </label>
-  <Close />
+  <div
+    on:click={() =>
+      dispatch("remove", {
+        id: todo.id,
+      })}
+  >
+    <Close />
+  </div>
 </li>
 
 <style>

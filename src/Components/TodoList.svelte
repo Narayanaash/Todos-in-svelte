@@ -1,12 +1,13 @@
 <script>
   import TodoItem from "./TodoItem.svelte";
 
-  export let todoList = [];
+  export let todos = [];
+  export let removeFromTodos;
 </script>
 
 <ul class="todo__list">
-  {#each todoList as todo (todo.id)}
-    <TodoItem {todo} />
+  {#each todos as todo (todo.id)}
+    <TodoItem {todo} on:remove={removeFromTodos} />
   {/each}
 </ul>
 

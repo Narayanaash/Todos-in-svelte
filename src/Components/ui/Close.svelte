@@ -16,6 +16,7 @@
 
 <style>
   svg {
+    display: block;
     opacity: 0.6;
     cursor: pointer;
     padding: 3px;

@@ -1,6 +1,13 @@
 <script>
-  import TodoForm from "./Components/TodoForm.svelte";
-  import TodoList from "./Components/TodoList.svelte";
+  import { onMount } from "svelte";
+  import TodoForm from "./components/TodoForm.svelte";
+  import TodoList from "./components/TodoList.svelte";
+
+  let ref;
+
+  onMount(() => {
+    ref.focus();
+  });
 
   let todos = [
     {
@@ -24,13 +31,28 @@
       isDone: false,
     },
   ];
+
+  let newTodo;
+
+  function addToList() {
+    if (!newTodo) {
+      return;
+    }
+    todos = [{ title: newTodo, id: Math.random(), isDone: false }, ...todos];
+    newTodo = "";
+  }
+
+  function removeFromTodos(event) {
+    todos = todos.filter((todo) => todo.id !== event.detail.id);
+    todos = todos;
+  }
 </script>
 
 <main>
   <div class="todo">
     <div class="todo__box">
-      <TodoForm />
-      <TodoList todoList={todos} />
+      <TodoForm bind:newTodo {addToList} bind:ref />
+      <TodoList {todos} on:remove={removeFromTodos} {removeFromTodos} />
     </div>
   </div>
 </main>

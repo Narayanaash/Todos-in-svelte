@@ -1,4 +1,7 @@
 <script>
+  export let ref = null;
+  export let newTodo = "";
+  export let addToList;
 </script>
 
 <form>
@@ -7,9 +10,14 @@
       class="todo__inputBox__input"
       type="search"
       placeholder="Type here something..."
-      autofocus
+      bind:value={newTodo}
+      bind:this={ref}
     />
-    <button class="todo__inputBox__btn" type="submit">Submit</button>
+    <button
+      class="todo__inputBox__btn"
+      type="submit"
+      on:click|preventDefault={addToList}>Submit</button
+    >
   </div>
 </form>
 
